@@ -1,0 +1,15 @@
+PS D:\myworking\test\react\customhook\customhook> git branch -M main     
+PS D:\myworking\test\react\customhook\customhook> git remote add origin https://github.com/vovinhloc/customhook.git
+PS D:\myworking\test\react\customhook\customhook> git push -u origin main
+
+Enumerating objects: 26, done.
+Counting objects: 100% (26/26), done.
+Compressing objects: 100% (26/26), done.
+Writing objects: 100% (26/26), 182.14 KiB | 5.69 MiB/s, done.
+Total 26 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), done.
+To https://github.com/vovinhloc/customhook.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+PS D:\myworking\test\react\customhook\customhook> git branch -M customhook
+PS D:\myworking\test\react\customhook\customhook>
