@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useState, useEffect } from "react";
 import { useReducer } from "./hooks/useReducer";
+import { useFetch } from "./hooks/useFetch";
 function fetchReducer(state, action) {
   switch (action.type) {
     case "fetchAPI/request":
@@ -19,37 +20,38 @@ function fetchReducer(state, action) {
   }
 }
 function App() {
-  const [state,dispatch]=useReducer(fetchReducer,{
-    data:[],
-    isLoading:false,
-    error:null
-  });
-  const {data:users,isLoading,error}=state;
+  const {data:users,isLoading,error}=useFetch('https://dummyjson.com/users');
+  // const [state,dispatch]=useReducer(fetchReducer,{
+  //   data:[],
+  //   isLoading:false,
+  //   error:null
+  // });
+  // const {data:users,isLoading,error}=state;
   // const [users, setUsers] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   // const [error, setError] = useState(null);
-  const fetchUsers = async () => {
-    // setIsLoading(true);
-    dispatch({type:"fetchAPI/request",isLoading:true,data:[],error:null});
-    try {
-      const res = await fetch("https://dummyjson.com/users");
-      const data = await res.json();
-      dispatch({type:"fetchAPI/success",isLoading:false,data:data.users,error:null});
-      // console.log(data);
-      // setUsers(data.users);
-      // setError(null);
-      // setIsLoading(false);
-      // console.log("HHHHHHHHHHHHHHHHHHH");
-    } catch (err) {
-      dispatch({type:"fetchAPI/error",isLoading:true,data:[],error:null});
-      // console.log("Errror: ", err);
-      // setUsers([]);
-      // setIsLoading(false);
-    }
-  };
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  // const fetchUsers = async () => {
+  //   // setIsLoading(true);
+  //   dispatch({type:"fetchAPI/request",isLoading:true,data:[],error:null});
+  //   try {
+  //     const res = await fetch("https://dummyjson.com/users");
+  //     const data = await res.json();
+  //     dispatch({type:"fetchAPI/success",isLoading:false,data:data.users,error:null});
+  //     // console.log(data);
+  //     // setUsers(data.users);
+  //     // setError(null);
+  //     // setIsLoading(false);
+  //     // console.log("HHHHHHHHHHHHHHHHHHH");
+  //   } catch (err) {
+  //     dispatch({type:"fetchAPI/error",isLoading:true,data:[],error:null});
+  //     // console.log("Errror: ", err);
+  //     // setUsers([]);
+  //     // setIsLoading(false);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []);
 
   const showUser = () => {
     return (
