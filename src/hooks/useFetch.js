@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import { useReducer } from "./useReducer";
 
 function fetchReducer(state, action) {
@@ -27,6 +27,11 @@ const fetchUsers = async (url = "https://dummyjson.com/users", dispatch) => {
   });
   try {
     const res = await fetch(url);
+    console.log("res là :", res);
+    if (!res.ok) {
+      // Check for HTTP errors
+      throw new Error("Network response was not ok");
+    }
     const data = await res.json();
     dispatch({
       type: "fetchAPI/success",
@@ -35,11 +40,12 @@ const fetchUsers = async (url = "https://dummyjson.com/users", dispatch) => {
       error: null,
     });
   } catch (err) {
+    console.log("eror :", err.message);
     dispatch({
       type: "fetchAPI/error",
-      isLoading: true,
+      isLoading: false,
       data: [],
-      error: null,
+      error: err,
     });
   }
 };
@@ -50,8 +56,11 @@ export const useFetch = (url) => {
     error: null,
   });
   useEffect(() => {
-    fetchUsers(url, dispatch);
+    if (url) {
+      fetchUsers(url, dispatch);
+    }
   }, [url]);
 
-  return { ...state };
+  // return { ...state };
+  return state;
 };

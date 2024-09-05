@@ -20,7 +20,7 @@ function fetchReducer(state, action) {
   }
 }
 function App() {
-  const {data:users,isLoading,error}=useFetch('https://dummyjson.com/users');
+  const {data:users,isLoading,error}=useFetch('https://ABC_dummyjson.com/users');
   // const [state,dispatch]=useReducer(fetchReducer,{
   //   data:[],
   //   isLoading:false,
@@ -54,6 +54,7 @@ function App() {
   // }, []);
 
   const showUser = () => {
+    if (!users || users.length === 0) return <p>No users found.</p>;
     return (
       <>
         {users?.map((user) => (
@@ -64,6 +65,7 @@ function App() {
       </>
     );
   };
+  console.log("ERRRRRRRRRRRRRRRRRR : ", error);
   if (error) {
     console.log("co loi xay ra");
     return (
